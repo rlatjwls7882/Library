@@ -1,9 +1,9 @@
-package com.project.library.Service;
+package com.project.library.service;
 
-import com.project.library.Entity.Book;
-import com.project.library.Entity.User;
-import com.project.library.Repository.BookRepository;
-import com.project.library.Repository.UserRepository;
+import com.project.library.entity.Book;
+import com.project.library.entity.User;
+import com.project.library.repository.BookRepository;
+import com.project.library.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

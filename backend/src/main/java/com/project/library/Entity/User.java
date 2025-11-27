@@ -1,4 +1,4 @@
-package com.project.library.Entity;
+package com.project.library.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

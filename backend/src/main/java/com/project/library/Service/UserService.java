@@ -1,6 +1,6 @@
-package com.project.library.Service;
+package com.project.library.service;
 
-import com.project.library.Entity.Book;
+import com.project.library.entity.Book;
 
 import java.util.ArrayList;
 

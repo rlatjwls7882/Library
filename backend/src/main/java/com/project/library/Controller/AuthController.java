@@ -1,6 +1,6 @@
-package com.project.library.Controller;
+package com.project.library.controller;
 
-import com.project.library.Service.UserService;
+import com.project.library.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
