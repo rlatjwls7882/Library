@@ -9,7 +9,7 @@ public interface UserService {
     boolean existsById(String id);
     boolean borrowBook(String userId, String isbn);
     boolean returnBook(String userId, String isbn);
-    boolean addBook(String isbn, String title, String author);
+    boolean addBook(String isbn, String title, String description, String author);
     boolean deleteBook(String isbn);
     Book getBookInfo(String isbn);
     boolean createUser(String userId, String name, String email, String password);

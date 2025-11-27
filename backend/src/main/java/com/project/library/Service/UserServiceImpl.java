@@ -50,12 +50,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean addBook(String isbn, String title, String author) {
+    public boolean addBook(String isbn, String title, String description, String author) {
         if(bookRepository.existsById(isbn)) return false;
-        Book book = new Book();
-        book.setIsbn(isbn);
-        book.setTitle(title);
-        book.setAuthor(author);
+        Book book = new Book(isbn, title, description, author);
         bookRepository.save(book);
         return true;
     }
@@ -75,11 +72,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean createUser(String userId, String name, String email, String password) {
         if(userRepository.existsById(userId)) return false;
-        User user = new User();
-        user.setUserId(userId);
-        user.setName(name);
-        user.setEmail(email);
-        user.setPassword(password);
+        User user = new User(userId, name, email, password);
         userRepository.save(user);
         return true;
     }

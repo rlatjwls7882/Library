@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/auth")
 public class AuthController {
     private final UserService userService;
+
     @GetMapping("/login")
     public ResponseEntity<?> login(String id, String password, HttpSession session) {
         if(!userService.chkPassword(id, password)) return ResponseEntity.ok(Boolean.FALSE);
-
         session.setAttribute("id", id);
         session.setMaxInactiveInterval(60*60*24);
         return ResponseEntity.ok(Boolean.TRUE);

@@ -35,9 +35,9 @@ public class UserController {
     }
 
     @PostMapping("/book")
-    public ResponseEntity<?> addBook(String isbn, String title, String author) {
+    public ResponseEntity<?> addBook(String isbn, String title, String description, String author) {
         if(isbn==null || title==null || author==null) return ResponseEntity.ok(Boolean.FALSE);
-        return ResponseEntity.ok(userService.addBook(isbn, title, author));
+        return ResponseEntity.ok(userService.addBook(isbn, description, title, author));
     }
 
     @DeleteMapping("/book")
