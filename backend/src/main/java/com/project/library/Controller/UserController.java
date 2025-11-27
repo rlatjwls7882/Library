@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/borrow")
+    @PostMapping("/borrow")
     public ResponseEntity<?> borrowBook(HttpSession session, String isbn) {
         String userId = (String)session.getAttribute("id");
         if(userId==null || isbn==null) return ResponseEntity.ok(Boolean.FALSE);
         return ResponseEntity.ok(userService.borrowBook(userId, isbn));
     }
 
-    @GetMapping("/return")
+    @PostMapping("/return")
     public ResponseEntity<?> returnBook(HttpSession session, String isbn) {
         String userId = (String)session.getAttribute("id");
         if(userId==null || isbn==null) return ResponseEntity.ok(Boolean.FALSE);

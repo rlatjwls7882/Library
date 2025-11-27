@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final UserService userService;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(String id, String password, HttpSession session) {
         if(!userService.chkPassword(id, password)) return ResponseEntity.ok(Boolean.FALSE);
         session.setAttribute("id", id);
@@ -20,7 +20,7 @@ public class AuthController {
         return ResponseEntity.ok(Boolean.TRUE);
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session) {
         if(session.getAttribute("id")==null) return ResponseEntity.ok(Boolean.FALSE);
         session.invalidate();
