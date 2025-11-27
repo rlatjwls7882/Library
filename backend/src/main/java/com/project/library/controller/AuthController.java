@@ -2,6 +2,7 @@ package com.project.library.controller;
 
 import com.project.library.dto.LoginRequest;
 import com.project.library.dto.RegisterRequest;
+import com.project.library.entity.User;
 import com.project.library.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,11 @@ public class AuthController {
         String id = loginRequest.id;
         String password = loginRequest.password;
 
-        if(!userService.chkPassword(id, password)) return ResponseEntity.ok(Boolean.FALSE);
+        User user = userService.loginChk(id, password);
+        if(user==null) return ResponseEntity.ok(Boolean.FALSE);
         session.setAttribute("id", id);
         session.setMaxInactiveInterval(60*60*24);
-        return ResponseEntity.ok(Boolean.TRUE);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/logout")

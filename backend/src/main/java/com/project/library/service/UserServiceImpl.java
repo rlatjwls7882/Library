@@ -16,10 +16,10 @@ public class UserServiceImpl implements UserService {
     private final BookRepository bookRepository;
 
     @Override
-    public boolean chkPassword(String id, String password) {
+    public User loginChk(String id, String password) {
         User user = userRepository.findById(id).orElse(null);
-        if(user==null) return false;
-        return user.getPassword().equals(password);
+        if(user!=null && password.equals(user.getPassword())) return user;
+        return null;
     }
 
     @Override

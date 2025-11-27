@@ -7,7 +7,6 @@ import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
 public class Book {
     @Id
     private String isbn;

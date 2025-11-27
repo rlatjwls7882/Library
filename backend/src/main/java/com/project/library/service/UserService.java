@@ -1,11 +1,12 @@
 package com.project.library.service;
 
 import com.project.library.entity.Book;
+import com.project.library.entity.User;
 
 import java.util.ArrayList;
 
 public interface UserService {
-    boolean chkPassword(String id, String password);
+    User loginChk(String id, String password);
     boolean existsById(String id);
     boolean borrowBook(String id, String isbn);
     boolean returnBook(String id, String isbn);
