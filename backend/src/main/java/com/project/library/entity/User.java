@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 public class User {
     @Id
-    private String userId;
+    private String id;
     private String name;
     private String email;
     private String password;
@@ -25,8 +25,8 @@ public class User {
     public User() {
         isAdmin=false;
     }
-    public User(String userId, String name, String email, String password) {
-        this.userId = userId;
+    public User(String id, String name, String email, String password) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;

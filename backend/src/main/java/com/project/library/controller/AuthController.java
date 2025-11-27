@@ -1,5 +1,7 @@
 package com.project.library.controller;
 
+import com.project.library.dto.LoginRequest;
+import com.project.library.dto.RegisterRequest;
 import com.project.library.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +15,10 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(String id, String password, HttpSession session) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpSession session) {
+        String id = loginRequest.id;
+        String password = loginRequest.password;
+
         if(!userService.chkPassword(id, password)) return ResponseEntity.ok(Boolean.FALSE);
         session.setAttribute("id", id);
         session.setMaxInactiveInterval(60*60*24);
@@ -28,7 +33,12 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(String id, String password, String name, String email) {
+    public ResponseEntity<?> register(@RequestBody RegisterRequest registerRequest) {
+        String id = registerRequest.id;
+        String password = registerRequest.password;
+        String name = registerRequest.name;
+        String email = registerRequest.email;
+
         if(id==null || password==null || name==null || email==null) return ResponseEntity.ok(Boolean.FALSE);
         if(userService.existsById(id)) return ResponseEntity.ok(Boolean.FALSE);
         return ResponseEntity.ok(userService.createUser(id, name, email, password));

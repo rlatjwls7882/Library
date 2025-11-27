@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean borrowBook(String userId, String isbn) {
-        User user = userRepository.findById(userId).orElse(null);
+    public boolean borrowBook(String id, String isbn) {
+        User user = userRepository.findById(id).orElse(null);
         Book book = bookRepository.findById(isbn).orElse(null);
         if(user==null || book==null || book.isBorrowed()) return false;
 
@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean returnBook(String userId, String isbn) {
-        User user = userRepository.findById(userId).orElse(null);
+    public boolean returnBook(String id, String isbn) {
+        User user = userRepository.findById(id).orElse(null);
         Book book = bookRepository.findById(isbn).orElse(null);
         if(user==null || book==null || !book.isBorrowed()) return false;
 
@@ -70,9 +70,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean createUser(String userId, String name, String email, String password) {
-        if(userRepository.existsById(userId)) return false;
-        User user = new User(userId, name, email, password);
+    public boolean createUser(String id, String name, String email, String password) {
+        if(userRepository.existsById(id)) return false;
+        User user = new User(id, name, email, password);
         userRepository.save(user);
         return true;
     }
