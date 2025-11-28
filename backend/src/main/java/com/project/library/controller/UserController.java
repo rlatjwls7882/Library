@@ -34,7 +34,6 @@ public class UserController {
 
     @GetMapping("/book")
     public ResponseEntity<?> searchBook(String isbn, String title, String author) {
-        if(isbn==null) return ResponseEntity.ok(Boolean.FALSE);
         var book = userService.getBookInfo(isbn, title, author);
         if(book==null) return ResponseEntity.ok(Boolean.FALSE);
         return ResponseEntity.ok(book);
