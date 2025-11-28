@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
 
         user.getHistories().add(new History("borrow", book));
         user.getBorrowedBooks().add(book);
+        book.setBorrowed(true);
         userRepository.save(user);
         return true;
     }
@@ -53,6 +54,7 @@ public class UserServiceImpl implements UserService {
 
         user.getHistories().add(new History("return", book));
         user.getBorrowedBooks().remove(book);
+        book.setBorrowed(false);
         userRepository.save(user);
         return true;
     }
