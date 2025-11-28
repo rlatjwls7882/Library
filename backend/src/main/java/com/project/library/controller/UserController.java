@@ -1,6 +1,9 @@
 package com.project.library.controller;
 
+import com.project.library.dto.BorrowBookReqeust;
 import com.project.library.dto.CreateBookRequest;
+import com.project.library.dto.DeleteBookRequest;
+import com.project.library.dto.ReturnBookReqeust;
 import com.project.library.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -14,17 +17,19 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/borrow")
-    public ResponseEntity<?> borrowBook(@RequestBody String isbn, HttpSession session) {
-        String userId = (String)session.getAttribute("id");
-        if(userId==null || isbn==null) return ResponseEntity.ok(Boolean.FALSE);
-        return ResponseEntity.ok(userService.borrowBook(userId, isbn));
+    public ResponseEntity<?> borrowBook(@RequestBody BorrowBookReqeust borrowBookReqeust, HttpSession session) {
+        String isbn = borrowBookReqeust.isbn;
+        String id = (String)session.getAttribute("id");
+        if(id==null || isbn==null) return ResponseEntity.ok(Boolean.FALSE);
+        return ResponseEntity.ok(userService.borrowBook(id, isbn));
     }
 
     @PostMapping("/return")
-    public ResponseEntity<?> returnBook(@RequestBody String isbn, HttpSession session) {
-        String userId = (String)session.getAttribute("id");
-        if(userId==null || isbn==null) return ResponseEntity.ok(Boolean.FALSE);
-        return ResponseEntity.ok(userService.returnBook(userId, isbn));
+    public ResponseEntity<?> returnBook(@RequestBody ReturnBookReqeust returnBookReqeust, HttpSession session) {
+        String isbn = returnBookReqeust.isbn;
+        String id = (String)session.getAttribute("id");
+        if(id==null || isbn==null) return ResponseEntity.ok(Boolean.FALSE);
+        return ResponseEntity.ok(userService.returnBook(id, isbn));
     }
 
     @GetMapping("/book")
@@ -46,7 +51,8 @@ public class UserController {
     }
 
     @DeleteMapping("/book")
-    public ResponseEntity<?> deleteBook(@RequestBody String isbn) {
+    public ResponseEntity<?> deleteBook(@RequestBody DeleteBookRequest deleteBookRequest) {
+        String isbn = deleteBookRequest.isbn;
         if (isbn==null) return ResponseEntity.ok(Boolean.FALSE);
         return ResponseEntity.ok(userService.deleteBook(isbn));
     }
@@ -58,6 +64,6 @@ public class UserController {
 
     @GetMapping("/histories")
     public ResponseEntity<?> getAllHistories() {
-        return ResponseEntity.ok(userService.getAllHistorys());
+        return ResponseEntity.ok(userService.getAllHistories());
     }
 }

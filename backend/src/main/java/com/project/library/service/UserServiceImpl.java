@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ArrayList<History> getAllHistorys() {
+    public ArrayList<History> getAllHistories() {
         return new ArrayList<>(historyRepository.findAll());
     }
 }

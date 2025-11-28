@@ -16,5 +16,5 @@ public interface UserService {
     Book getBookInfo(String isbn);
     boolean createUser(String id, String name, String email, String password);
     ArrayList<Book> getAllBooks();
-    ArrayList<History> getAllHistorys();
+    ArrayList<History> getAllHistories();
 }
