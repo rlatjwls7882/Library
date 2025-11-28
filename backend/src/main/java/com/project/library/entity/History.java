@@ -2,6 +2,7 @@ package com.project.library.entity;
 
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+import org.hibernate.mapping.ToOne;
 
 import java.util.Date;
 
@@ -14,7 +15,7 @@ public class History {
     private Date date;
     private String content;
 
-    @OneToOne
+    @ManyToOne
     private Book book;
 
     public History(String content, Book book) {

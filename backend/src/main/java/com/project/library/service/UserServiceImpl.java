@@ -50,6 +50,8 @@ public class UserServiceImpl implements UserService {
     public boolean returnBook(String id, String isbn) {
         User user = userRepository.findById(id).orElse(null);
         Book book = bookRepository.findById(isbn).orElse(null);
+        System.out.println("user = " + user);
+        System.out.println("book = " + book);
         if(user==null || book==null || !book.isBorrowed()) return false;
 
         user.getHistories().add(new History("return", book));
