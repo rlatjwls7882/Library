@@ -1,12 +1,13 @@
 package com.project.library.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.mapping.ToOne;
 
 import java.util.Date;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class History {
     @Id
