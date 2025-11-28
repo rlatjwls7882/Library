@@ -4,6 +4,7 @@ import com.project.library.entity.Book;
 import com.project.library.entity.History;
 import com.project.library.entity.User;
 import com.project.library.repository.BookRepository;
+import com.project.library.repository.HistoryRepository;
 import com.project.library.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+    private final HistoryRepository historyRepository;
 
     @Override
     public User loginChk(String id, String password) {
@@ -86,5 +88,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public ArrayList<Book> getAllBooks() {
         return new ArrayList<>(bookRepository.findAll());
+    }
+
+    @Override
+    public ArrayList<History> getAllHistorys() {
+        return new ArrayList<>(historyRepository.findAll());
     }
 }

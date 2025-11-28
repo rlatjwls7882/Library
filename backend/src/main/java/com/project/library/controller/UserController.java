@@ -55,4 +55,9 @@ public class UserController {
     public ResponseEntity<?> getAllBooks() {
         return ResponseEntity.ok(userService.getAllBooks());
     }
+
+    @GetMapping("/histories")
+    public ResponseEntity<?> getAllHistories() {
+        return ResponseEntity.ok(userService.getAllHistorys());
+    }
 }

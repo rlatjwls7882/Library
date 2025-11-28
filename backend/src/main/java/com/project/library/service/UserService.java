@@ -1,6 +1,7 @@
 package com.project.library.service;
 
 import com.project.library.entity.Book;
+import com.project.library.entity.History;
 import com.project.library.entity.User;
 
 import java.util.ArrayList;
@@ -15,4 +16,5 @@ public interface UserService {
     Book getBookInfo(String isbn);
     boolean createUser(String id, String name, String email, String password);
     ArrayList<Book> getAllBooks();
+    ArrayList<History> getAllHistorys();
 }
