@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -83,8 +82,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Book getBookInfo(String isbn) {
-        return bookRepository.findById(isbn).orElse(null);
+    public Book getBookInfo(String isbn, String title, String author) {
+        if(isbn!=null) return bookRepository.findById(isbn).orElse(null);
+        if(title!=null) return bookRepository.findByTitle(title);
+        return bookRepository.findByAuthor(author);
     }
 
     @Override

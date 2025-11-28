@@ -13,7 +13,7 @@ public interface UserService {
     boolean returnBook(String id, String isbn);
     boolean addBook(String isbn, String title, String description, String author);
     boolean deleteBook(String isbn);
-    Book getBookInfo(String isbn);
+    Book getBookInfo(String isbn, String title, String author);
     boolean createUser(String id, String name, String email, String password);
     ArrayList<Book> getAllBooks();
     ArrayList<History> getAllHistories();
