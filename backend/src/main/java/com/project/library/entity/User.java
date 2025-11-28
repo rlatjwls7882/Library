@@ -26,7 +26,7 @@ public class User {
     @OneToMany
     private List<Book> borrowedBooks = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<History> histories = new ArrayList<>();
 
     public User(String id, String name, String email, String password) {

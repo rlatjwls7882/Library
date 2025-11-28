@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -70,8 +71,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public boolean deleteBook(String isbn) {
         if(!bookRepository.existsById(isbn)) return false;
+
+        userRepository.findAll().forEach(user -> user.getBorrowedBooks().removeIf(book -> book.getIsbn().equals(isbn)));
+        userRepository.findAll().forEach(user -> user.getHistories().removeIf(history -> history.getBook().getIsbn().equals(isbn)));
+        historyRepository.findAll().stream().filter(history -> history.getBook().getIsbn().equals(isbn)).forEach(historyRepository::delete);
         bookRepository.deleteById(isbn);
         return true;
     }
