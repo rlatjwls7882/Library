@@ -1,6 +1,6 @@
 package com.project.library.controller;
 
-import com.project.library.dto.CreateBookRequest;
+import com.project.library.dto.*;
 import com.project.library.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -14,21 +14,24 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/borrow")
-    public ResponseEntity<?> borrowBook(@RequestBody String isbn, HttpSession session) {
+    public ResponseEntity<?> borrowBook(@RequestBody BorrowBookRequest borrowBookRequest, HttpSession session) {
+        String isbn = borrowBookRequest.isbn;
         String userId = (String)session.getAttribute("id");
         if(userId==null || isbn==null) return ResponseEntity.ok(Boolean.FALSE);
         return ResponseEntity.ok(userService.borrowBook(userId, isbn));
     }
 
     @PostMapping("/return")
-    public ResponseEntity<?> returnBook(@RequestBody String isbn, HttpSession session) {
+    public ResponseEntity<?> returnBook(@RequestBody ReturnBookRequest returnBookRequest, HttpSession session) {
+        String isbn = returnBookRequest.isbn;
         String userId = (String)session.getAttribute("id");
         if(userId==null || isbn==null) return ResponseEntity.ok(Boolean.FALSE);
         return ResponseEntity.ok(userService.returnBook(userId, isbn));
     }
 
     @GetMapping("/book")
-    public ResponseEntity<?> searchBook(@RequestBody String isbn) {
+    public ResponseEntity<?> searchBook(@RequestBody SearchBookRequest searchBookRequest) {
+        String isbn = searchBookRequest.isbn;
         if(isbn==null) return ResponseEntity.ok(Boolean.FALSE);
         var book = userService.getBookInfo(isbn);
         if(book==null) return ResponseEntity.ok(Boolean.FALSE);
@@ -46,7 +49,8 @@ public class UserController {
     }
 
     @DeleteMapping("/book")
-    public ResponseEntity<?> deleteBook(@RequestBody String isbn) {
+    public ResponseEntity<?> deleteBook(@RequestBody DeleteBookRequest deleteBookRequest) {
+        String isbn = deleteBookRequest.isbn;
         if (isbn==null) return ResponseEntity.ok(Boolean.FALSE);
         return ResponseEntity.ok(userService.deleteBook(isbn));
     }
