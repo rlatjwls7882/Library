@@ -1,9 +1,11 @@
 package com.project.library.service;
 
 import com.project.library.entity.Book;
+import com.project.library.entity.History;
 import com.project.library.entity.User;
 import com.project.library.repository.BookRepository;
 import com.project.library.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,22 +30,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public boolean borrowBook(String id, String isbn) {
         User user = userRepository.findById(id).orElse(null);
         Book book = bookRepository.findById(isbn).orElse(null);
         if(user==null || book==null || book.isBorrowed()) return false;
 
+        user.getHistories().add(new History("borrow", book));
         user.getBorrowedBooks().add(book);
         userRepository.save(user);
         return true;
     }
 
     @Override
+    @Transactional
     public boolean returnBook(String id, String isbn) {
         User user = userRepository.findById(id).orElse(null);
         Book book = bookRepository.findById(isbn).orElse(null);
         if(user==null || book==null || !book.isBorrowed()) return false;
 
+        user.getHistories().add(new History("return", book));
         user.getBorrowedBooks().remove(book);
         userRepository.save(user);
         return true;

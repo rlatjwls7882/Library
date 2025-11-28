@@ -3,10 +3,12 @@ package com.project.library.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Book {
     @Id
     private String isbn;
@@ -15,9 +17,6 @@ public class Book {
     private String author;
     private boolean isBorrowed;
 
-    public Book() {
-        isBorrowed=false;
-    }
     public Book(String isbn, String title, String description, String author) {
         this.isbn = isbn;
         this.title = title;

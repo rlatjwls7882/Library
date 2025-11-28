@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class User {
     @Id
     private String id;
@@ -22,9 +24,9 @@ public class User {
     @OneToMany
     private List<Book> borrowedBooks;
 
-    public User() {
-        isAdmin=false;
-    }
+    @OneToMany
+    private List<History> histories;
+
     public User(String id, String name, String email, String password) {
         this.id = id;
         this.name = name;
